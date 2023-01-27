@@ -81,8 +81,8 @@ List<Object[]> StatEnchere = (List<Object[]>) request.getAttribute("StatEnchere"
                 <div class="row">
                     <div class="col">
                         <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                            </div>
+                            <!-- <div class="card-header py-3">
+                            </div> -->
                             <div class="card-body">
                                 <p style="color: var(--bs-blue);font-weight: bold;">Nombre total des produits vendus par catégorie</p>
                                 <div class="table-responsive">
