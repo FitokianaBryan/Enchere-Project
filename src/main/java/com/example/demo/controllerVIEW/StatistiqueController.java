@@ -30,10 +30,13 @@ public class StatistiqueController {
         //Stat Enchere
         List<Object[]> StatEnchere = sd.StatEnchere(con);
 
+        List<Object[]> StatGraphe = sd.StatGraphe(con);
+
         request.setAttribute("graphe",graphe);
         request.setAttribute("NombreTotalProduitVendu",NombreTotalProduitVendu);
         request.setAttribute("StatMembre",StatMembre);
         request.setAttribute("StatEnchere",StatEnchere);
+        request.setAttribute("StatGraphe",StatGraphe);
         request.setAttribute("annee",2023);
         return "Statistique";
     }

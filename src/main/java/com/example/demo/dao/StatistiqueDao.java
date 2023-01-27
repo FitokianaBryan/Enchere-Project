@@ -20,7 +20,7 @@ public class StatistiqueDao {
             while (con.getResultset().next()) {
                 int idenchere = res.getInt(1);
                 float montant = res.getFloat(2);
-               liste.add(new Object[] {idenchere,montant});
+                liste.add(new Object[] {idenchere,montant});
             }
             return liste;
         } catch (Exception e) {
@@ -107,5 +107,25 @@ public class StatistiqueDao {
             return null;
         }
     }
+
+    //Stat graphe
+    public List<Object[]> StatGraphe(Connexion con)
+    {
+        List<Object[]> liste = new ArrayList<>();
+        try {
+            String requete ="select*from graphe";
+            con = new Connexion(requete, "hh");
+            ResultSet res = con.getResultset();
+            while (con.getResultset().next()) {
+                String typecategorie = con.getResultset().getString(1);
+                float montant_total = con.getResultset().getFloat(2);
+                liste.add(new Object[] {typecategorie,montant_total});
+            }
+            return liste;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
 }

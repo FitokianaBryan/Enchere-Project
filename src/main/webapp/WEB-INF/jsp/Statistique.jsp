@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="java.time.LocalDate"%>
 <%
-List<Object[]> liste = (List<Object[]>) request.getAttribute("graphe");
-List<Object[]> NombreTotalProduitVendu = (List<Object[]>) request.getAttribute("NombreTotalProduitVendu");
-List<Object[]> StatMembre = (List<Object[]>) request.getAttribute("StatMembre");
-List<Object[]> StatEnchere = (List<Object[]>) request.getAttribute("StatEnchere");
+    List<Object[]> liste = (List<Object[]>) request.getAttribute("graphe");
+    List<Object[]> NombreTotalProduitVendu = (List<Object[]>) request.getAttribute("NombreTotalProduitVendu");
+    List<Object[]> StatMembre = (List<Object[]>) request.getAttribute("StatMembre");
+    List<Object[]> StatEnchere = (List<Object[]>) request.getAttribute("StatEnchere");
+    List<Object[]> StatGraphe = (List<Object[]>) request.getAttribute("StatGraphe");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +18,6 @@ List<Object[]> StatEnchere = (List<Object[]>) request.getAttribute("StatEnchere"
     <link rel="stylesheet" href="assets/General/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="assets/General/fonts/fontawesome-all.min.css">
-
 </head>
 
 <body id="page-top">
@@ -35,12 +35,12 @@ List<Object[]> StatEnchere = (List<Object[]>) request.getAttribute("StatEnchere"
             <ul class="navbar-nav text-light" id="accordionSidebar">
                 <li class="nav-item">
                     <a class="nav-link" href="/ListeRechargementCompte"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-64 0 512 512" width="1em" height="1em" fill="currentColor">
-                    <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                    <path d="M336 64h-53.88C268.9 26.8 233.7 0 192 0S115.1 26.8 101.9 64H48C21.5 64 0 85.48 0 112v352C0 490.5 21.5 512 48 512h288c26.5 0 48-21.48 48-48v-352C384 85.48 362.5 64 336 64zM96 392c-13.25 0-24-10.75-24-24S82.75 344 96 344s24 10.75 24 24S109.3 392 96 392zM96 296c-13.25 0-24-10.75-24-24S82.75 248 96 248S120 258.8 120 272S109.3 296 96 296zM192 64c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S160 113.7 160 96C160 78.33 174.3 64 192 64zM304 384h-128C167.2 384 160 376.8 160 368C160 359.2 167.2 352 176 352h128c8.801 0 16 7.199 16 16C320 376.8 312.8 384 304 384zM304 288h-128C167.2 288 160 280.8 160 272C160 263.2 167.2 256 176 256h128C312.8 256 320 263.2 320 272C320 280.8 312.8 288 304 288z"></path>
-                </svg><span>&nbsp;Demande rechargement compte</span></a>
+                        <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                        <path d="M336 64h-53.88C268.9 26.8 233.7 0 192 0S115.1 26.8 101.9 64H48C21.5 64 0 85.48 0 112v352C0 490.5 21.5 512 48 512h288c26.5 0 48-21.48 48-48v-352C384 85.48 362.5 64 336 64zM96 392c-13.25 0-24-10.75-24-24S82.75 344 96 344s24 10.75 24 24S109.3 392 96 392zM96 296c-13.25 0-24-10.75-24-24S82.75 248 96 248S120 258.8 120 272S109.3 296 96 296zM192 64c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S160 113.7 160 96C160 78.33 174.3 64 192 64zM304 384h-128C167.2 384 160 376.8 160 368C160 359.2 167.2 352 176 352h128c8.801 0 16 7.199 16 16C320 376.8 312.8 384 304 384zM304 288h-128C167.2 288 160 280.8 160 272C160 263.2 167.2 256 176 256h128C312.8 256 320 263.2 320 272C320 280.8 312.8 288 304 288z"></path>
+                    </svg><span>&nbsp;Demande rechargement compte</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/Statistique"><i class="fas fa-sort-amount-up-alt"></i><span>&nbsp;Statistiques</span></a>
+                    <a class="nav-link" href="/Statistique"><i class="fas fa-sort-amount-up-alt"></i><span>&nbsp;Statistiques</span></a>
                 </li>
             </ul>
             <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -49,40 +49,36 @@ List<Object[]> StatEnchere = (List<Object[]>) request.getAttribute("StatEnchere"
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content">
             <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><span style="color: rgb(0,0,0);font-weight: bold;">STATISTIQUES</span>
+                <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><span style="color: rgb(0,0,0);font-weight: bold;">ACCUEIL</span>
                     <ul class="navbar-nav flex-nowrap ms-auto">
-<%--                        <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>--%>
-<%--                            <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">--%>
-<%--                                <form class="me-auto navbar-search w-100">--%>
-<%--                                    <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">--%>
-<%--                                        <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>--%>
-<%--                                    </div>--%>
-<%--                                </form>--%>
-<%--                            </div>--%>
-<%--                        </li>--%>
+                        <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
+                            <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
+                                <form class="me-auto navbar-search w-100">
+                                    <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                        <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow"><a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i></a></li>
                     </ul>
                 </div>
             </nav>
             <div class="container-fluid">
-<%--                <div class="row">--%>
-<%--                    <div class="col">--%>
-<%--                        <div class="card shadow mb-4">--%>
-<%--                            <div class="card-header d-flex justify-content-between align-items-center">--%>
-
-<%--                            </div>--%>
-<%--                            <div class="card-body">--%>
-<%--                                <div class="chart-area"><canvas id="myChart"></canvas></div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
                 <div class="row">
                     <div class="col">
                         <div class="card shadow mb-4">
-                            <!-- <div class="card-header py-3">
-                            </div> -->
+                            <div class="card-body">
+                                <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Oeuvre d'arts&quot;,&quot;Bijoux&quot;,&quot;Objets de collection&quot;,&quot;Livres&quot;,&quot;Vêtements&quot;,&quot;Electronique&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;backgroundColor&quot;:[&quot;#4e73df&quot;,&quot;#1cc88a&quot;,&quot;#36b9cc&quot;,&quot;rgba(0,0,0,0.1)&quot;,&quot;rgba(0,0,0,0.1)&quot;,&quot;rgba(0,0,0,0.1)&quot;],&quot;borderColor&quot;:[&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;],&quot;data&quot;:[&quot;2&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;1&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}}}"></canvas></div>
+                                <div class="text-center small mt-4"><span class="me-2"><i class="fas fa-circle text-primary"></i>Oeuvres d'arts</span><span class="me-2"><i class="fas fa-circle text-info" style="color: var(--bs-card-border-color);"></i>&nbsp;Bijoux</span><span class="me-2">&nbsp;<i class="fas fa-circle" style="color: var(--bs-red);"></i>&nbsp;Objets de collection</span><span class="me-2">&nbsp;<i class="fas fa-circle" style="color: var(--bs-gray-dark);"></i>&nbsp;Livres</span><span class="me-2">&nbsp;<i class="fas fa-circle" style="color: var(--bs-purple);"></i>&nbsp;Vêtements</span><span class="me-2">&nbsp;<i class="fas fa-circle" style="color: var(--bs-gray-400);"></i>&nbsp;Electronique</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-4">
                             <div class="card-body">
                                 <p style="color: var(--bs-blue);font-weight: bold;">Nombre total des produits vendus par catégorie</p>
                                 <div class="table-responsive">
@@ -155,6 +151,8 @@ List<Object[]> StatEnchere = (List<Object[]>) request.getAttribute("StatEnchere"
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
 <script src="assets/General/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/General/js/chart.min.js"></script>
+<script src="assets/General/js/bs-init.js"></script>
 <script src="assets/General/js/theme.js"></script>
 </body>
 </html>

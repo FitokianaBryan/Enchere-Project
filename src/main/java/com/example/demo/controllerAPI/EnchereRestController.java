@@ -1,7 +1,7 @@
 package com.example.demo.controllerAPI;
 
 
-import com.example.demo.ObjectBdd.ManipDb;
+import com.example.demo.ObjectBdd.*;
 import com.example.demo.connex.Connexion;
 import com.example.demo.dao.*;
 import com.example.demo.models.Enchere;
@@ -26,7 +26,7 @@ public class EnchereRestController {
     HistoriqueOffreDao hod = new HistoriqueOffreDao();
 
     PrelevementEnchereDao ped = new PrelevementEnchereDao();
-  Connexion con1 = new Connexion();
+    Connexion con1 = new Connexion();
     Connection con;
     {
         try {
@@ -42,7 +42,7 @@ public class EnchereRestController {
             List<Enchere> list = ed.getListEnchere(con);
             for(Enchere e : list)
             {
-                   ed.EnchereTerminer(con1,e.getIdenchere());
+                ed.EnchereTerminer(con1,e.getIdenchere());
             }
             return new ResponseEntity<List<Enchere>>(list,HttpStatus.OK);
         }catch(Exception e){
@@ -66,8 +66,8 @@ public class EnchereRestController {
     }
 
 
-    @GetMapping("ficheEnchere")
-    public ResponseEntity<List<Enchere>> getFicheEnchere(@RequestParam("idenchere") int idEnchere){
+    @GetMapping("ficheEnchere/{idEnchere}")
+    public ResponseEntity<List<Enchere>> getFicheEnchere(@PathVariable int idEnchere){
         try{
             return new ResponseEntity<List<Enchere>>(new EnchereDao().getFicheEnchere(con,idEnchere), HttpStatus.OK);
         }catch(Exception e){
@@ -101,30 +101,30 @@ public class EnchereRestController {
         TokenUser tu;
         if(tud.validTokenUser(token)!=0)
         {
-                tu = tud.getTokenUser(token);
-                float montant_user = new UtilisateurDao().getCompteUser(tu.getIdUtilisateur(),con1);
-                if(montant_user<prixminimumvente)
-                {
-                     response.setStatus("400");
-                     response.setMessage("votre solde est insuffisante");
-                }
-                else
-                {
-                    int result = ed.AjouterEncher(con1,tu.getIdUtilisateur(),description,prixminimumvente,durreenchere);
-                    //compte user
-                    hod.setCompteUser(tu.getIdUtilisateur(),prixminimumvente,con1);
-                    //commission
-                    ped.Inserer(con1,result,ed.MontantPrelevee(result));
-                    response.setMessage("votre vente a été bien prise en compte");
-                    response.setStatus("200");
-                    response.setDatas(String.valueOf(result));
-                }
+            tu = tud.getTokenUser(token);
+            float montant_user = new UtilisateurDao().getCompteUser(tu.getIdUtilisateur(),con1);
+            if(montant_user<prixminimumvente)
+            {
+                response.setStatus("400");
+                response.setMessage("votre solde est insuffisante");
+            }
+            else
+            {
+                int result = ed.AjouterEncher(con1,tu.getIdUtilisateur(),description,prixminimumvente,durreenchere);
+                //compte user
+                hod.setCompteUser(tu.getIdUtilisateur(),prixminimumvente,con1);
+                //commission
+                ped.Inserer(con1,result,ed.MontantPrelevee(result));
+                response.setMessage("votre vente a été bien prise en compte");
+                response.setStatus("200");
+                response.setDatas(String.valueOf(result));
+            }
         }
-       else
-       {
+        else
+        {
             response.setStatus("404");
             response.setMessage("veuillez dabord vous authentifier");
-       }
+        }
         return response;
     }
 

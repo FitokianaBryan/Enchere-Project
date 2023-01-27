@@ -15,7 +15,7 @@ public class HistoriqueEnchereDao {
     {
         List<Object[]> liste = new ArrayList<>();
         try {
-            String requete ="SELECT  e.description, e.prixMinimumVente, e.durreEnchere, e.DateHeureEnchere, ho.montant_offre, ho.DateHeureOffre, p.nomProduit, p.description, cp.typeCategorie , e.idutilisateur as iduser FROM Utilisateur u JOIN HistoriqueOffre ho using(idUtilisateur) JOIN Enchere e using(idEnchere) JOIN Produit_Enchere pe  using(idEnchere) JOIN Produit p using(idProduit) JOIN CategorieProduit cp using(idCategorieProduit) WHERE u.idUtilisateur = "+idutilisateur+" ORDER BY ho.DateHeureMise DESC";
+            String requete ="SELECT  e.description, e.prixMinimumVente, e.durreEnchere, e.DateHeureEnchere, ho.montant_offre, ho.DateHeureOffre, p.nomProduit, p.description, cp.typeCategorie , e.idutilisateur as iduser FROM Utilisateur u JOIN HistoriqueOffre ho using(idUtilisateur) JOIN Enchere e using(idEnchere) JOIN Produit_Enchere pe  using(idEnchere) JOIN Produit p using(idProduit) JOIN CategorieProduit cp using(idCategorieProduit) WHERE u.idUtilisateur = "+idutilisateur+" ORDER BY ho.DateHeureoffre DESC";
             con = new Connexion(requete, "hh");
             ResultSet res = con.getResultset();
             while (con.getResultset().next()) {

@@ -16,13 +16,13 @@ public class HistoriqueOffreDao {
     UtilisateurDao ud = new UtilisateurDao();
     EnchereDao ed = new EnchereDao();
 
-    public boolean siUserVendeur(Connexion con, int idenchere, int idutilisateurLogged) throws SQLException {
+    public int siUserVendeur(Connexion con, int idenchere, int idutilisateurLogged) throws SQLException {
         int idutilisateurVendeur = ed.getObjetEchere(con,idenchere).getIdUtilisateur();
         if(idutilisateurVendeur==idutilisateurLogged)
         {
-            return true;
+            return 1;
         }
-        return false;
+        return 0;
     }
 
     public void Encherir(Connexion con,int idenchere,int idutilisateur,float montant)
